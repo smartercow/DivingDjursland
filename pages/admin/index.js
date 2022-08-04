@@ -1,23 +1,30 @@
 import React from "react";
-import SignUp from "../../components/Admin/auth/SignUp";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Dashboard from "../../components/Admin/Dashboard";
 import { auth } from "../../components/Firebase/clientApp";
-import LogIn from "../../components/Admin/auth/LogIn";
+import { useRouter } from "next/router";
 
 const Admin = () => {
   const [user] = useAuthState(auth);
+  const router = useRouter()
 
+  if (router.pathname.startsWith('/admin')) {
+      router.push('/admin/dashboard')
+  }
+
+  if (user) {
+    router.push('/auth')
+  }
   return (
-    <div className="max-w-5xl mx-5 lg:mx-auto flex flex-col gap-5 md:gap-10 lg:gap-16 relative">
-      {!user ? (
+    <div>
+      {user ? (
         <div>
-          <LogIn />
-          <br />
-          <SignUp />
+          <Dashboard />
         </div>
       ) : (
-        <Dashboard />
+        <div>
+          <h1>Side kun for admins!</h1>
+        </div>
       )}
     </div>
   );

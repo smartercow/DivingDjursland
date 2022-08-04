@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   addDoc,
   collection,
+  deleteDoc,
   doc,
   serverTimestamp,
   updateDoc,
@@ -14,6 +15,7 @@ import { Button, Card, Grid, Input, Row, Text } from "@nextui-org/react";
 import { IoMdCloudUpload } from "react-icons/io";
 import NavSettings from "./NavSettings";
 import { DeleteDocumentIcon } from "../../../../assets/DeleteDocumentIcon";
+import Video from "./Video";
 
 const Forsiden = () => {
   //State for title & link fra inputs
@@ -26,6 +28,9 @@ const Forsiden = () => {
   const user = useAuthState(auth);
 
   //console.log('user', user[0].email)
+
+  //True/False for useEffect opdatering
+  const [update, setUpdate] = useState(false);
 
   //State for alle documents i Slides collection der mappes ud i return
   const [slideList, setSlideList] = useState([]);
@@ -63,6 +68,7 @@ const Forsiden = () => {
     );
     //Nulstiller file input value
     setSelectedFile(null);
+    setUpdate(!update)
   };
 
   //Ligger billede URL i selectedFile state via onChange på file input
@@ -77,6 +83,15 @@ const Forsiden = () => {
     };
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await deleteDoc(doc(firestore, "Slides", id));
+      setUpdate(!update)
+    } catch (error) {
+      console.log("Fejl i sletning!", error.message)
+    }
+  };
+
   //Henter alle documents i Slides collection og sætter dem i en state der mapper dem under i return
   useEffect(() => {
     const getSlides = async () => {
@@ -86,7 +101,7 @@ const Forsiden = () => {
       );
     };
     getSlides();
-  }, []);
+  }, [update]);
 
   return (
     <div>
@@ -100,7 +115,7 @@ const Forsiden = () => {
             <Grid.Container gap={2} justify="flex-start">
               {slideList.map((slide, index) => (
                 <Grid xs={6} sm={3} key={index}>
-                  <Card>
+                  <Card variant="bordered">
                     <Card.Body css={{ p: 0 }}>
                       <Card.Image
                         src={slide.image}
@@ -122,6 +137,9 @@ const Forsiden = () => {
                           <DeleteDocumentIcon
                             fill="#F31260"
                             className="cursor-pointer"
+                            onClick={() => {
+                              handleDelete(slide.id);
+                            }}
                           />
                         </Text>
                       </Row>
@@ -175,12 +193,13 @@ const Forsiden = () => {
                       <div className="flex flex-col justify-between gap-3 sm:flex-row sm:gap-[20%]">
                         <Button
                           flat
-                          className="bg-gray-200 text-black w-full"
+                          css={{ background: '#F1F3F5'}}
+                          className="text-black w-full"
                           auto
                           onClick={() => selectedFileRef.current?.click()}
                           width=""
                         >
-                          <Text>Upload</Text>
+                          <Text>Upload billede</Text>
                           <IoMdCloudUpload className="text-xl ml-3" />
                         </Button>
                         <Button
@@ -201,6 +220,9 @@ const Forsiden = () => {
             <Card.Divider className="mt-5 mb-3" />
             <div>
               <NavSettings user={user} />
+            </div>
+            <div>
+              <Video />
             </div>
           </div>
         </Card.Body>

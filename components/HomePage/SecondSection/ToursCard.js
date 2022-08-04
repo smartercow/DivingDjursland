@@ -41,7 +41,7 @@ const Tours = () => {
         <div className="flex justify-between gap-5">
           {list.map((item, index) => (
             <div key={index}>
-              <Card className="w-35 sm:w-35 md:w-55 lg:w-80">
+              <Card className="w-35 sm:w-35 md:w-55 lg:w-80" key={index}>
                 <Card.Body css={{ p: 0 }}>
                   <Card.Image
                     src={item.img}
@@ -51,7 +51,7 @@ const Tours = () => {
                     alt={item.title}
                   />
                 </Card.Body>
-            
+
                 <Card.Header css={{ pb: 2 }}>
                   <Button css={{ opacity: 0.8 }} size="xs">
                     VIDEO
@@ -123,6 +123,7 @@ const Tours = () => {
             <Collapse.Group splitted>
               {list.map((item, index) => (
                 <Collapse
+                  key={index}
                   title={
                     <Text h5 className="flex gap-4 items-center">
                       <Text>{item.date}</Text> {item.title}
@@ -132,7 +133,14 @@ const Tours = () => {
                   <Card css={{ filter: "none" }}>
                     <Card.Header className="rounded-sm h-28">
                       <div>
-                        <img className="" src={item.img} alt="" />
+                        <Image
+                          layout="responsive"
+                          objectFit="contain"
+                          height="100%"
+                          width="100%"
+                          src={item.img}
+                          alt=""
+                        />
                       </div>
                     </Card.Header>
                     <Card.Header css={{ pb: 0 }}>
@@ -180,7 +188,7 @@ const Tours = () => {
           </Grid>
         </Grid.Container>
       </div>
-      </>
+    </>
   );
 };
 

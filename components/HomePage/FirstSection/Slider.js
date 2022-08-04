@@ -4,7 +4,24 @@ import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper";
 
 import Image from "next/image";
+import { collection, getDocs } from "firebase/firestore";
+import { firestore } from "../../Firebase/clientApp";
+import { useEffect, useState } from "react";
 const Slider = () => {
+  const [slideList, setSlideList] = useState([]);
+  const [update, setUpdate] = useState(false);
+
+  const slideCollectionRef = collection(firestore, "Slides");
+
+  useEffect(() => {
+    const getSlides = async () => {
+      const slideData = await getDocs(slideCollectionRef);
+      setSlideList(
+        slideData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
+    getSlides();
+  }, []);
   return (
     <div>
       <Swiper
@@ -18,30 +35,11 @@ const Slider = () => {
         modules={[Autoplay, Pagination]}
         className="mySwiper h-60 sm:h-72 md:h-80"
       >
-        <SwiperSlide>
-          <Image
-            src="/images/slider1.png"
-            layout="fill"
-            objectFit="cover"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-        <Image
-            src="/images/slider2.jpg"
-            layout="fill"
-            objectFit="cover"
-            alt=""
-          />
-        </SwiperSlide>
-        <SwiperSlide>
-        <Image
-            src="/images/slider3.jpg"
-            layout="fill"
-            objectFit="cover"
-            alt=""
-          />
-        </SwiperSlide>
+        {slideList.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <Image src={slide.image} layout="fill" objectFit="cover" alt="" />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </div>
   );

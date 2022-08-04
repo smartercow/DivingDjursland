@@ -1,4 +1,5 @@
 import Head from "next/head";
+import Image from "next/image";
 import FirstSection from "../components/HomePage/FirstSection";
 import PriceSection from "../components/HomePage/PriceSection";
 import SecondSection from "../components/HomePage/SecondSection";
@@ -13,12 +14,18 @@ export default function Home() {
       </Head>
 
       <main className="">
-
         {/* First section */}
         <div className="bg-gradient pt-5 relative">
           <FirstSection />
           <div className="relative">
-            <img className="mb-[-8px]" src="/images/wavessvg.svg" alt="" />
+            <Image
+              layout="responsive"
+              height="5vh"
+              objectFit="cover"
+              width="100%"
+              src="/images/wavessvg.svg"
+              alt=""
+            />
           </div>
         </div>
 
@@ -26,12 +33,19 @@ export default function Home() {
         <div className="s-section pt-10 flex flex-col gap-10">
           <SecondSection />
           <div>
-            <img src="/images/wavessvg-blue.svg" alt="" />
+            <Image
+              layout="responsive"
+              height="5vh"
+              objectFit="cover"
+              width="100%"
+              src="/images/wavessvg-blue.svg"
+              alt=""
+            />
           </div>
         </div>
 
         {/* Price & Team section */}
-        <div className="bg-gradient mt-[-7px]">
+        <div className="bg-gradient">
           <PriceSection />
         </div>
       </main>

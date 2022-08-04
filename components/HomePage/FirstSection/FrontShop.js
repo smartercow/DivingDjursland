@@ -1,4 +1,5 @@
 import { Button, Text } from "@nextui-org/react";
+import Image from "next/image";
 import Link from "next/link";
 
 const FrontShop = () => {
@@ -29,11 +30,16 @@ const FrontShop = () => {
       <div className="w-80 md:w-96 sm:inline">
         <div className="relative ani-con ">
           {/* <div className="front-c h-40 w-40 sm:h-44 sm:w-44 md:h-48 md:w-48 lg:h-56 lg:w-56"></div> */}
-          <img
-            className="front-diver h-60 w-60 sm:h-48 sm:w-48 md:h-60 md:w-60 lg:h-72 lg:w-72 opacity-75"
-            src="/images/roundedbeach.png"
-            alt=""
-          />
+          <div className="front-diver h-60 w-60 sm:h-48 sm:w-48 md:h-60 md:w-60 lg:h-72 lg:w-72 opacity-75">
+            <Image
+              layout="responsive"
+              objectFit="contain"
+              height="100%"
+              width="100%"
+              src="/images/roundedbeach.png"
+              alt=""
+            />
+          </div>
           <Text
             h1
             size={70}
@@ -44,7 +50,16 @@ const FrontShop = () => {
           >
             ScubaFun
           </Text>
-          <img className="diver" src="/images/diver.png" alt="" />
+          <div className="diver">
+            <Image
+              layout="responsive"
+              objectFit="contain"
+              height="100%"
+              width="100%"
+              src="/images/diver.png"
+              alt=""
+            />
+          </div>
         </div>
         <div className="sm:hidden flex justify-center">
           <Link href="/omos">

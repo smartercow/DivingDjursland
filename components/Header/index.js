@@ -58,13 +58,15 @@ const Header = () => {
         {/* Right */}
         <div className="hidden sm:inline">
           <div className="flex items-center">
-            <Link color="primary" href="/admin">
+            <Link color="primary" href="/auth">
               <CgLogIn className="h-10 w-8" />
             </Link>
           </div>
         </div>
         <div className="sm:hidden flex items-center pt-3">
-          <CgMenuRightAlt className="h-10 w-8" />
+          <Link href="/auth">
+            <CgMenuRightAlt className="h-10 w-8" />
+          </Link>
         </div>
       </div>
     </div>
