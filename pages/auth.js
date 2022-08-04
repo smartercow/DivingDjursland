@@ -35,14 +35,6 @@ const Auth = () => {
   return (
     <div className="bg-gradient pt-5 relative h-80 bg-[url('/images/headerimg.svg')] bg-contain">
       <div>
-        <Image
-          layout="responsive"
-          objectFit="contain"
-          height="100%"
-          width="100%"
-          src=""
-          alt=""
-        />
       </div>
       <div className="max-w-5xl mx-5 lg:mx-auto">
         <div className="mx-auto absolute md:top-10 md:left-[40%]">
