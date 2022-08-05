@@ -18,11 +18,11 @@ const Auth = () => {
     const docSnap = await getDoc(docRef);
     if (docSnap.exists() && docSnap.data().isAdmin === true) {
       setUserData(docSnap.data());
-      console.log("isAdmin is True");
+      console.log("isAdmin = True");
     } else if (docSnap.exists() && docSnap.data().isAdmin === false) {
-      console.log("isAdmin is False");
+      console.log("isAdmin = False");
     } else {
-      console.log("No such document!");
+      console.log("Intet sådant dokument!");
     }
   };
 

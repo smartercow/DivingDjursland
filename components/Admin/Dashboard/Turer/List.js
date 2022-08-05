@@ -37,10 +37,10 @@ const list = [
 const List = () => {
   return (
     <div>
-        <div className="flex justify-between gap-5">
+        <div className="flex flex-col md:flex-row justify-between gap-2">
             {list.map((item, index) => (
               <div key={index}>
-                <Card variant='bordered' className="w-35 sm:w-35 md:w-55 lg:w-80">
+                <Card variant='bordered'>
                   <Card.Body css={{ p: 0 }}>
                     <Card.Image
                       src={item.img}

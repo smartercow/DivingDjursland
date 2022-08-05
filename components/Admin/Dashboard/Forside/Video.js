@@ -4,7 +4,7 @@ import React from "react";
 const Video = () => {
   return (
     <div>
-      <Text className="my-3 font-bold">Forside video</Text>
+      <Text className="my-3 font-bold">Video på forsiden</Text>
       <Grid>
         <Card variant="bordered">
           <Card.Body>

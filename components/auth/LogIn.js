@@ -13,6 +13,7 @@ const SignIn = () => {
 
   const [user] = useAuthState(auth);
   const router = useRouter();
+  const [loginError, setloginError] = useState()
 
 
   const [signInWithEmailAndPassword, userCred, loading, error] =
@@ -21,11 +22,15 @@ const SignIn = () => {
   //Firebase logic
   const onSubmit = (event) => {
     event.preventDefault();
-    signInWithEmailAndPassword(loginForm.email, loginForm.password);
+    try {
+      signInWithEmailAndPassword(loginForm.email, loginForm.password);
+    } catch (error) {
+      /* setloginError(error.msg) */
+      /* console.log("fejllogin", error.msg); */
+    }
   };
 
   const onChange = (event) => {
-    //Update form state
     setLoginForm((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
@@ -68,7 +73,7 @@ const SignIn = () => {
           {/* <input name="password" type="password" onChange={onChange} /> <br /> */}
           <Input.Password
             required
-            label="Password"
+            label="Kodeord"
             name="password"
             type="password"
             shadow={false}
@@ -84,7 +89,7 @@ const SignIn = () => {
           </Button>
           {error && (
             <div>
-              <h4>Error: {error}</h4>
+              <h6>Email eller password matcher ikke!</h6>
             </div>
           )}
         </div>

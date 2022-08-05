@@ -13,7 +13,7 @@ const Team = () => {
           <div className="flex gap-4 flex-col md:flex-row">
             <Card variant="bordered">
               <Card.Body>
-                <Image layout="fill" objectFit="cover" src="assets/testimgs/obama.jpg" alt="" />
+                <Image layout="fill" objectFit="cover" src="/assets/testimgs/obama.jpg" alt="" />
               </Card.Body>
               <Card.Divider></Card.Divider>
 

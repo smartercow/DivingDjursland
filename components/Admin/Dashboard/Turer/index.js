@@ -33,7 +33,7 @@ const Turer = () => {
         <Card.Body>
           <Card variant="bordered">
             <Card.Body>
-            <Text className="mb-2 font-semibold">Ny menu</Text>
+            <Text className="mb-2 font-semibold">Ny tur</Text>
               <div className="flex justify-between gap-8 flex-col md:flex-row">
                 <div className="flex flex-col gap-2 w-full">
                   <Input
