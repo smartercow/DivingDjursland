@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, firestore } from "../../Firebase/clientApp";
-import Charts from './Charts'
+import Charts from "./Charts";
 const Dashboard = ({ children }) => {
   const [user] = useAuthState(auth);
   const [usersList, setUsersList] = useState([]);
@@ -22,6 +22,8 @@ const Dashboard = ({ children }) => {
     getUsers();
   }, []);
 
+  console.log(usersList);
+
   return (
     <div>
       <div>
@@ -38,15 +40,31 @@ const Dashboard = ({ children }) => {
         >
           <Table.Header>
             <Table.Column>Email</Table.Column>
-            <Table.Column>Sidste login</Table.Column>
             <Table.Column>Oprettet</Table.Column>
+            <Table.Column>Sidste login</Table.Column>
           </Table.Header>
           <Table.Body>
             {usersList.map((user, index) => (
               <Table.Row key={index}>
                 <Table.Cell>{user.user.email}</Table.Cell>
-                <Table.Cell>{new Date(user.user.lastLoginAt).toLocaleString("da-DK", {year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit",})}</Table.Cell>
-                <Table.Cell>{new Date(user.user.createdAt).toLocaleString()}</Table.Cell>
+                <Table.Cell>
+                  {new Date(Number(user.user.createdAt)).toLocaleString("da-DK", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </Table.Cell>
+                <Table.Cell>
+                  {new Date(Number(user.user.lastLoginAt)).toLocaleString("da-DK", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
