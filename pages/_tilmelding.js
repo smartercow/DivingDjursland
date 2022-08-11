@@ -1,19 +1,31 @@
 import { Button, Checkbox, Dropdown, Input } from "@nextui-org/react";
-import React, { useMemo, useState } from "react";
+import {
+  addDoc,
+  collection,
+  getDocs,
+  serverTimestamp,
+} from "firebase/firestore";
+import React, { useEffect, useMemo, useState } from "react";
+import { firestore } from "../components/Firebase/clientApp";
+
+const initialState = {
+  navn: "",
+  adresse: "",
+  email: "",
+  tel: 0,
+  height: 0,
+  weight: 0,
+  sko: 0,
+};
 
 const Tilmelding = () => {
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [email, setEmail] = useState("");
-  const [tel, setTel] = useState(0);
-  const [height, setHeight] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [shoeSize, setShoeSize] = useState(0);
-  const [grill, setGrill] = useState(false);
-
+  const [form, setForm] = useState(initialState);
+  const [grill, setGrill] = useState(true);
+  const [turerList, setTurerList] = useState([]);
+  const [tur, setTur] = useState("")
   const [selectedTour, setSelectedTour] = useState(new Set(["Valg turer"]));
   const [selectedPayment, setSelectedPayment] = useState(
-    new Set(["Betalingsmetode"])
+    new Set(["Mobilepay"])
   );
 
   const selectedTourValue = useMemo(
@@ -26,9 +38,41 @@ const Tilmelding = () => {
     [selectedPayment]
   );
 
+  const { navn, adresse, email, tel, height, weight, sko } = form;
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await addDoc(collection(firestore, "Tilmelding"), {
+        ...form,
+        sendt: serverTimestamp(),
+        betalingsmetode: selectedPaymentValue,
+        tur: selectedTourValue,
+        grill: grill,
+        godkendt: false
+      });
+    } catch (error) {}
+  };
+
+  const turerColRef = collection(firestore, "Turer");
+
+  useEffect(() => {
+    const getTurer = async () => {
+      const turerData = await getDocs(turerColRef);
+      setTurerList(
+        turerData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
+    };
+    getTurer();
+  }, []);
+  console.log(selectedTourValue);
   return (
     <div className="max-w-5xl mx-5 lg:mx-auto">
-      <form action="">
+      <form onSubmit={handleSubmit}>
         <div className="flex flex-col gap-4 bg-[#CFF0F8] p-4 md:p-8 rounded-2xl w-full">
           <div className="flex flex-col gap-4 md:flex-row">
             <div className="flex flex-col gap-3 w-full">
@@ -40,7 +84,9 @@ const Tilmelding = () => {
                 width="100%"
                 aria-label="Title"
                 size="lg"
-                onChange={(event) => setName(event.target.value)}
+                name="navn"
+                value={navn}
+                onChange={handleChange}
               />
               <Input
                 flat
@@ -50,7 +96,9 @@ const Tilmelding = () => {
                 width="100%"
                 aria-label="Adresse"
                 size="lg"
-                onChange={(event) => setAddress(event.target.value)}
+                name="adresse"
+                value={adresse}
+                onChange={handleChange}
               />
               <Input
                 flat
@@ -60,7 +108,9 @@ const Tilmelding = () => {
                 width="100%"
                 aria-label="Email"
                 size="lg"
-                onChange={(event) => setEmail(event.target.value)}
+                name="email"
+                value={email}
+                onChange={handleChange}
               />
               <Input
                 flat
@@ -70,7 +120,9 @@ const Tilmelding = () => {
                 width="100%"
                 aria-label="Telefon"
                 size="lg"
-                onChange={(event) => setTel(event.target.value)}
+                name="tel"
+                value={tel}
+                onChange={handleChange}
               />
             </div>
             <div className="flex flex-col gap-3 w-full">
@@ -82,7 +134,9 @@ const Tilmelding = () => {
                 width="100%"
                 aria-label="Højde"
                 size="lg"
-                onChange={(event) => setHeight(event.target.value)}
+                name="height"
+                value={height}
+                onChange={handleChange}
               />
               <Input
                 flat
@@ -92,7 +146,9 @@ const Tilmelding = () => {
                 width="100%"
                 aria-label="Vægt"
                 size="lg"
-                onChange={(event) => setWeight(event.target.value)}
+                name="weight"
+                value={weight}
+                onChange={handleChange}
               />
               <Input
                 flat
@@ -102,14 +158,23 @@ const Tilmelding = () => {
                 width="100%"
                 aria-label="Email"
                 size="lg"
-                onChange={(event) => setShoeSize(event.target.value)}
+                name="sko"
+                value={sko}
+                onChange={handleChange}
               />
-              <Checkbox color="primary" defaultSelected={true} size="sm">
+              <Checkbox
+                color="primary"
+                defaultSelected={true}
+                value={grill}
+                isSelected={grill}
+                onChange={setGrill}
+                size="sm"
+              >
                 Skal du være med til at grille?
               </Checkbox>
               <Dropdown>
-                <Dropdown.Button flat color="white" css={{ tt: "capitalize" }}>
-                  {selectedTourValue}
+                <Dropdown.Button  color="white" css={{ tt: "capitalize" }}>
+                  Valg Tur
                 </Dropdown.Button>
                 <Dropdown.Menu
                   aria-label="Single selection actions"
@@ -119,15 +184,11 @@ const Tilmelding = () => {
                   selectedKeys={selectedTour}
                   onSelectionChange={setSelectedTour}
                 >
-                  <Dropdown.Item key="07/08 Sangstrup Klint">
-                    07/08 Sangstrup Klint
-                  </Dropdown.Item>
-                  <Dropdown.Item key="number">
-                    07/08 Sangstrup Klint
-                  </Dropdown.Item>
-                  <Dropdown.Item key="date">Date</Dropdown.Item>
-                  <Dropdown.Item key="single_date">Single Date</Dropdown.Item>
-                  <Dropdown.Item key="iteration">Iteration</Dropdown.Item>
+                  {turerList.map((item) => (
+                    <Dropdown.Item key={item.id} textValue={item.sted}>
+                      {item.dato.slice(5)} - {item.sted}
+                    </Dropdown.Item>
+                  ))}
                 </Dropdown.Menu>
               </Dropdown>
             </div>
@@ -135,7 +196,10 @@ const Tilmelding = () => {
           <div className="flex flex-col md:flex-row justify-between gap-4">
             <div className="w-full">
               <Dropdown>
-                <Dropdown.Button flat color="white" css={{ tt: "capitalize", width: '100%' }}>
+                <Dropdown.Button
+                  color="white"
+                  css={{ tt: "capitalize", width: "100%" }}
+                >
                   {selectedPaymentValue}
                 </Dropdown.Button>
                 <Dropdown.Menu
@@ -146,16 +210,19 @@ const Tilmelding = () => {
                   selectedKeys={selectedPayment}
                   onSelectionChange={setSelectedPayment}
                 >
-                  <Dropdown.Item key="MobilePay">MobilePay</Dropdown.Item>
-                  <Dropdown.Item key="number">Number</Dropdown.Item>
-                  <Dropdown.Item key="date">Date</Dropdown.Item>
-                  <Dropdown.Item key="single_date">Single Date</Dropdown.Item>
-                  <Dropdown.Item key="iteration">Iteration</Dropdown.Item>
+                  <Dropdown.Item key="mobilePay">MobilePay</Dropdown.Item>
+                  <Dropdown.Item key="kontant">Kontant</Dropdown.Item>
+                  <Dropdown.Item key="scuba_shoppen">
+                    Scuba Shoppen
+                  </Dropdown.Item>
+                  <Dropdown.Item key="bankoverførsel">
+                    Bankoverførsel
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>
             <div className="w-full flex md:justify-end">
-              <Button>TILMELD</Button>
+              <Button type="submit">TILMELD</Button>
             </div>
           </div>
         </div>

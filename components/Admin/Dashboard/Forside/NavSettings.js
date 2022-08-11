@@ -200,15 +200,28 @@ const NavSettings = ({ user }) => {
                 <Button
                   flat
                   className="text-black w-full"
-                  css={{ background: '#F1F3F5'}}
+                  css={{ background: "#F1F3F5" }}
                   auto
                   onClick={() => selectedFileRef.current?.click()}
                   width=""
                 >
+                  {selectedFile ? (
+                    <Text>selectedFile</Text>
+                  ) : (
+                    <>
+                      <Text>Upload icon</Text>
+                      <IoMdCloudUpload className="text-xl ml-3" />
+                    </>
+                  )}
                   <Text>Upload icon</Text>
                   <IoMdCloudUpload className="text-xl ml-3" />
                 </Button>
-                <input type="file" hidden ref={selectedFileRef} onChange={addIconToMenu}/>
+                <input
+                  type="file"
+                  hidden
+                  ref={selectedFileRef}
+                  onChange={addIconToMenu}
+                />
               </div>
 
               {opdater ? (

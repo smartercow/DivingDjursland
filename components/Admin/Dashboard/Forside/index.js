@@ -68,7 +68,7 @@ const Forsiden = () => {
     );
     //Nulstiller file input value
     setSelectedFile(null);
-    setUpdate(!update)
+    setUpdate(!update);
   };
 
   //Ligger billede URL i selectedFile state via onChange på file input
@@ -86,9 +86,9 @@ const Forsiden = () => {
   const handleDelete = async (id) => {
     try {
       await deleteDoc(doc(firestore, "Slides", id));
-      setUpdate(!update)
+      setUpdate(!update);
     } catch (error) {
-      console.log("Fejl i sletning!", error.message)
+      console.log("Fejl i sletning!", error.message);
     }
   };
 
@@ -184,20 +184,19 @@ const Forsiden = () => {
                         <input
                           type="file"
                           placeholder="Upload billede..."
-                          onChange={addImageToSlide}
                           className="w-full"
                           hidden
+                          onChange={addImageToSlide}
                           ref={selectedFileRef}
                         />
                       </div>
                       <div className="flex flex-col justify-between gap-3 sm:flex-row sm:gap-[20%]">
                         <Button
                           flat
-                          css={{ background: '#F1F3F5'}}
+                          css={{ background: "#F1F3F5" }}
                           className="text-black w-full"
                           auto
                           onClick={() => selectedFileRef.current?.click()}
-                          width=""
                         >
                           <Text>Upload billede</Text>
                           <IoMdCloudUpload className="text-xl ml-3" />
