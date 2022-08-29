@@ -1,4 +1,4 @@
-import { Avatar, Dropdown, Navbar, Text } from '@nextui-org/react';
+import { Navbar, Text, Avatar, Dropdown } from "@nextui-org/react";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react'
