@@ -5,7 +5,7 @@ import Link from "next/link";
 const FrontShop = () => {
   return (
     <div className="flex justify-between items-center gap-5 flex-col sm:flex-row">
-      <div className=" max-w-none sm:max-w-xs md:max-w-sm lg:max-w-lg">
+      <div className=" max-w-none sm:max-w-xs md:max-w-sm lg:max-w-lg flex flex-col gap-5">
         <Text
           className="text-xl sm:text-2xl md:text-3xl tracking-wider"
           color="primary"
@@ -21,7 +21,7 @@ const FrontShop = () => {
         </p>
         <div className="hidden sm:inline">
           <Link href="/omos">
-            <Button auto size="lg">
+            <Button color="secondary" auto size="lg">
               GÅ TIL SHOPPEN
             </Button>
           </Link>
@@ -29,7 +29,6 @@ const FrontShop = () => {
       </div>
       <div className="w-80 md:w-96 sm:inline">
         <div className="relative ani-con ">
-          {/* <div className="front-c h-40 w-40 sm:h-44 sm:w-44 md:h-48 md:w-48 lg:h-56 lg:w-56"></div> */}
           <div className="front-diver h-60 w-60 sm:h-48 sm:w-48 md:h-60 md:w-60 lg:h-72 lg:w-72 opacity-75">
             <Image
               layout="responsive"

@@ -3,6 +3,18 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+const MyButton = React.forwardRef(({ onClick, href }, ref) => {
+  return (
+    <a href={href} onClick={onClick} ref={ref}>
+      <Button size="lg" rounded className="bg-[#5379FE]">
+        <Text color="white" className="text-md font-bold">
+          FIND EN TUR
+        </Text>
+      </Button>
+    </a>
+  );
+});
+
 const VideoSection = () => {
   return (
     <div className="relative">
@@ -21,14 +33,8 @@ const VideoSection = () => {
             amet consectet adipisicing elit
           </Text>
           <div className="flex justify-center md:mt-5">
-            <Link href="/turer">
-              <a>
-                <Button size="lg" rounded className="bg-[#5379FE]">
-                  <Text color="white" className="text-md font-bold">
-                    FIND EN TUR
-                  </Text>
-                </Button>
-              </a>
+            <Link href="/turer" passHref>
+              <MyButton />
             </Link>
           </div>
         </div>
@@ -45,7 +51,6 @@ const VideoSection = () => {
         />
       </div>
       <div>
-        {" "}
         {/* md:h-[40rem] lg:h-[50rem] xl:h-[55rem] */}
         <video
           autoPlay
@@ -53,7 +58,10 @@ const VideoSection = () => {
           loop
           className="w-full h-[40vh]  md:h-[65vh] lg:h-[75vh] object-cover"
         >
-          <source src="https://marinio.b-cdn.net/wp-content/uploads/2021/10/pexels-adrien-jacta-6430497.mp4" type="video/mp4" />
+          <source
+            src="https://marinio.b-cdn.net/wp-content/uploads/2021/10/pexels-adrien-jacta-6430497.mp4"
+            type="video/mp4"
+          />
         </video>
       </div>
       <div className="absolute bottom-0 w-full">

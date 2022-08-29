@@ -11,8 +11,8 @@ function MyApp({ Component, pageProps }) {
     type: "OceanByPeter",
     theme: {
       colors: {
-        primary: "#083C50",
-        secondary: "#CFF0F8",
+        primary: "#0A2540",
+        secondary: "#5379FE",
         tertiary: "#EBFBFF",
         primarySolidHover: "#cff0f8",
         primarySolidContrast: "$white",

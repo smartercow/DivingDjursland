@@ -21,7 +21,7 @@ const Content = ({navigation}) => {
   
   return (
     <div className='w-full'>
-      <Navbar isBordered variant="sticky">
+      <Navbar isBordered variant="sticky" css={{backgroundColor: "#0A2540"}}>
         <Navbar.Toggle showIn="xs" />
         <Navbar.Brand
           css={{
