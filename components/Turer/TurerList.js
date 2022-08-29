@@ -132,17 +132,19 @@ const TurerList = () => {
           onClose={closeHandler}
           className="w-full"
           width="70%"
+          css={{ bg: "$primary", }}
+          noPadding
         >
           <Modal.Header>
-            <Text id="modal-title" size={18}>
+            <Text id="modal-title" size={18} color="white" className="top-[-5px]">
               Tilmelding -&nbsp;
-              <Text b size={18}>
+              <Text b size={18} color="white">
                 {tur} ({turDato})
               </Text>
             </Text>
           </Modal.Header>
           <Modal.Body>
-            <Tilmelding tur={tur} turId={turId} turDato={turDato}/>
+            <Tilmelding tur={tur} turId={turId} turDato={turDato} closeHandler={closeHandler}/>
           </Modal.Body>
           {/* <Modal.Footer>footer</Modal.Footer> */}
         </Modal>

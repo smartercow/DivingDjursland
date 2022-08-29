@@ -61,6 +61,7 @@ const Slider = () => {
                   layout="fill"
                   objectFit="cover"
                   alt=""
+                  priority
                 />
               </a>
             </Link>

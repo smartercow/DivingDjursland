@@ -26,6 +26,12 @@
 .diver {
     animation: diveranimation 6s alternate infinite;
 }
+/* TURN IMAGE */
+
+.flip-h {
+    transform: scaleY(-1);
+    transform: rotate(180deg);
+  }
 
 /* YOUTUBE EMBED */
   

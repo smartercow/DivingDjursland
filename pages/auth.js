@@ -33,7 +33,7 @@ const Auth = () => {
   }, [user]);
 
   return (
-    <div className="bg-gradient pt-5 relative h-80 bg-[url('/images/headerimg.svg')] bg-contain">
+    <div className="bg-gradient pt-5 relative h-[90vh] bg-[url('/images/headerimg.svg')] bg-contain">
       <div>
       </div>
       <div className="max-w-5xl mx-5 lg:mx-auto">

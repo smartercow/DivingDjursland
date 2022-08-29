@@ -1,12 +1,8 @@
 import { Button, Checkbox, Dropdown, Input } from "@nextui-org/react";
-import {
-  addDoc,
-  collection,
-  getDocs,
-  serverTimestamp,
-} from "firebase/firestore";
+
 import React, { useEffect, useMemo, useState } from "react";
 import { firestore } from "../Firebase/clientApp";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 
 const initialState = {
   navn: "",
@@ -18,10 +14,10 @@ const initialState = {
   sko: 0,
 };
 
-const Tilmelding = ({tur, turId, turDato}) => {
+const Tilmelding = ({ tur, turId, turDato, closeHandler }) => {
   const [form, setForm] = useState(initialState);
   const [grill, setGrill] = useState(true);
-  const [turerList, setTurerList] = useState([]);
+
   const [selectedPayment, setSelectedPayment] = useState(
     new Set(["Mobilepay"])
   );
@@ -48,26 +44,16 @@ const Tilmelding = ({tur, turId, turDato}) => {
         turId: turId,
         turDato: turDato,
         grill: grill,
-        godkendt: false
+        godkendt: false,
       });
+      closeHandler()
     } catch (error) {}
   };
 
-  const turerColRef = collection(firestore, "Turer");
-
-  useEffect(() => {
-    const getTurer = async () => {
-      const turerData = await getDocs(turerColRef);
-      setTurerList(
-        turerData.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
-    };
-    getTurer();
-  }, []);
   return (
     <div>
       <form onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-4 bg-[#CFF0F8] p-4 md:p-8 rounded-2xl w-full">
+        <div className="flex flex-col gap-4 bg-[#CFF0F8] p-4 md:p-8 w-full">
           <div className="flex flex-col gap-4 md:flex-row">
             <div className="flex flex-col gap-3 w-full">
               <Input
@@ -166,37 +152,40 @@ const Tilmelding = ({tur, turId, turDato}) => {
               >
                 Skal du være med til at grille?
               </Checkbox>
+              <div className="w-full">
+                <Dropdown>
+                  <Dropdown.Button
+                    color="white"
+                    css={{ tt: "capitalize", width: "100%" }}
+                  >
+                    {selectedPaymentValue}
+                  </Dropdown.Button>
+                  <Dropdown.Menu
+                    aria-label="Single selection actions"
+                    color="primary"
+                    disallowEmptySelection
+                    selectionMode="single"
+                    selectedKeys={selectedPayment}
+                    onSelectionChange={setSelectedPayment}
+                  >
+                    <Dropdown.Item key="mobilePay">MobilePay</Dropdown.Item>
+                    <Dropdown.Item key="kontant">Kontant</Dropdown.Item>
+                    <Dropdown.Item key="scuba_shoppen">
+                      Scuba Shoppen
+                    </Dropdown.Item>
+                    <Dropdown.Item key="bankoverførsel">
+                      Bankoverførsel
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between gap-4">
-            <div className="w-full">
-              <Dropdown>
-                <Dropdown.Button
-                  color="white"
-                  css={{ tt: "capitalize", width: "100%" }}
-                >
-                  {selectedPaymentValue}
-                </Dropdown.Button>
-                <Dropdown.Menu
-                  aria-label="Single selection actions"
-                  color="primary"
-                  disallowEmptySelection
-                  selectionMode="single"
-                  selectedKeys={selectedPayment}
-                  onSelectionChange={setSelectedPayment}
-                >
-                  <Dropdown.Item key="mobilePay">MobilePay</Dropdown.Item>
-                  <Dropdown.Item key="kontant">Kontant</Dropdown.Item>
-                  <Dropdown.Item key="scuba_shoppen">
-                    Scuba Shoppen
-                  </Dropdown.Item>
-                  <Dropdown.Item key="bankoverførsel">
-                    Bankoverførsel
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
-            <div className="w-full flex md:justify-end">
+            <div className="w-full flex md:justify-end gap-6">
+              <Button auto color="error" onClick={closeHandler}>
+                ANNULLERE
+              </Button>
               <Button type="submit">TILMELD</Button>
             </div>
           </div>

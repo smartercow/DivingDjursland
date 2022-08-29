@@ -133,13 +133,13 @@ const List = ({
               <Card.Divider />
               <Card.Footer className="flex justify-between">
                 <Text className="text-gray-500 text-sm">
-                  Oprettet:{" "}
+                  Oprettet: &nbsp;
                   {item.oprettet.toDate().toLocaleString("da-DK", {
                     year: "numeric",
                     month: "long",
                     day: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
+/*                     hour: "2-digit",
+                    minute: "2-digit", */
                   })}
                 </Text>
                 <div className="flex gap-1">

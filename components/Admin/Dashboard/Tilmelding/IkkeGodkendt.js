@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Collapse, Table, Text } from "@nextui-org/react";
+import { firestore } from "../../../Firebase/clientApp";
 import {
   collection,
   doc,
-  FieldValue,
   getDocs,
   increment,
-  setDoc,
   updateDoc,
   writeBatch,
 } from "firebase/firestore";
-import { firestore } from "../../../Firebase/clientApp";
 
 const IkkeGodkendt = ({ update, setUpdate }) => {
   const [tilmeldingData, setTilmeldingData] = useState([]);

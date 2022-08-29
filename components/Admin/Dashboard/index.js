@@ -22,7 +22,7 @@ const Dashboard = ({ children }) => {
     getUsers();
   }, []);
 
-  console.log(usersList);
+  console.log(user);
 
   return (
     <div>

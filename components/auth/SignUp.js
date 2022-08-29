@@ -61,7 +61,6 @@ const SignUp = () => {
   useEffect(() => {
     if (user) {
       createUserDocument(user);
-      console.log(user);
       router.push('/')
     }
   }, [user]);

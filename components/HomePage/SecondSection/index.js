@@ -22,7 +22,7 @@ const SecondSection = () => {
           {/* Næste dykker turer */}
           <ToursCard />
         </div>
-        <div>
+        <div className="mb-10">
           {/* Youtube embed video */}
           <FrontVideo />
         </div>
