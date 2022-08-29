@@ -53,7 +53,7 @@ const VideoSection = () => {
           loop
           className="w-full h-[40vh]  md:h-[65vh] lg:h-[75vh] object-cover"
         >
-          <source src="/videos/divingvideo.mp4" type="video/mp4" />
+          <source src="https://marinio.b-cdn.net/wp-content/uploads/2021/10/pexels-adrien-jacta-6430497.mp4" type="video/mp4" />
         </video>
       </div>
       <div className="absolute bottom-0 w-full">
