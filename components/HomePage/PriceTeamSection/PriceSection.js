@@ -6,7 +6,7 @@ const PriceSection = () => {
       <div className="w-full">
         <Card>
           <Card.Body>
-            <div className="flex flex-col gap-3 px-3">
+            <div className="flex flex-col gap-1 md:gap-3 px-3">
               <Text color="primary" transform="uppercase" h5>
                 Strand scuba <br /> dykning
               </Text>
@@ -30,7 +30,7 @@ const PriceSection = () => {
       <div className="w-full">
         <Card>
           <Card.Body>
-            <div className="flex flex-col gap-3 px-3">
+            <div className="flex flex-col gap-1 md:gap-3 px-3">
               <Text color="primary" transform="uppercase" h5>
                 Båd scuba <br /> dykning
               </Text>
@@ -54,7 +54,7 @@ const PriceSection = () => {
       <div className="w-full">
         <Card>
           <Card.Body>
-            <div className="flex flex-col gap-3 px-3">
+            <div className="flex flex-col gap-1 md:gap-3 px-3">
               <Text color="primary" transform="uppercase" h5>
                 Scuba dykning <br /> kurser
               </Text>

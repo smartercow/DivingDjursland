@@ -4,7 +4,7 @@ import TeamSection from "./TeamSection";
 
 const PriceTeamSection = () => {
   return (
-    <div className="max-w-5xl mx-5 lg:mx-auto pt-3">
+    <div className="max-w-5xl mx-5 lg:mx-auto pt-6 md:pt-3">
       <div className="text-center">
         <Text
           className="text-xl sm:text-2xl md:text-3xl tracking-wider"
@@ -21,7 +21,7 @@ const PriceTeamSection = () => {
         <div>
           <PriceSection />
         </div>
-        <div>
+        <div className="hidden md:inline">
           <div className="text-center">
             <Text
               className="text-xl sm:text-2xl md:text-3xl tracking-wider"

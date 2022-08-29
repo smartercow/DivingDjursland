@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const FrontShop = () => {
   return (
-    <div className="flex justify-between items-center gap-5 flex-col sm:flex-row">
+    <div className="flex justify-between items-center gap-5 flex-col sm:flex-row mt-8 md:mt-0">
       <div className=" max-w-none sm:max-w-xs md:max-w-sm lg:max-w-lg flex flex-col gap-5">
         <Text
           className="text-xl sm:text-2xl md:text-3xl tracking-wider"
@@ -29,7 +29,7 @@ const FrontShop = () => {
       </div>
       <div className="w-80 md:w-96 sm:inline">
         <div className="relative ani-con ">
-          <div className="front-diver h-60 w-60 sm:h-48 sm:w-48 md:h-60 md:w-60 lg:h-72 lg:w-72 opacity-75">
+          <div className="front-diver h-40 w-40 sm:h-48 sm:w-48 md:h-60 md:w-60 lg:h-72 lg:w-72 opacity-75">
             <Image
               layout="responsive"
               objectFit="contain"

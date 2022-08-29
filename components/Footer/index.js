@@ -3,11 +3,16 @@ import Image from "next/image";
 import { Button, Input, Text } from "@nextui-org/react";
 
 import { MdLocationPin, MdEmail } from "react-icons/md";
-import { BsTelephoneFill } from "react-icons/bs";
+import { BsTelephoneFill, BsInstagram, BsFacebook } from "react-icons/bs";
+import {
+  FaFacebookSquare,
+  FaYoutube,
+  FaInstagram
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <div className="relative bg-[#EBFBFF]">
+    <div className="relative bg-[#EBFBFF] pt-5 md:pt-0">
       <div className="bg-[#EBFBFF]">
         <div className="max-w-5xl mx-5 lg:mx-auto">
           <div className="flex flex-col md:flex-row justify-between gap-5 md:gap-3 lg:gap-10 mb-7">
@@ -23,14 +28,14 @@ const Footer = () => {
               <Text color="primary">
                 Lorem ipsum dolor sit amet co icing elitdolor sit amet consect
                 dolor sit amet consectetur elit sit amet co icing elitdolor sit
-                amet consect
+                amet consect.
               </Text>
             </div>
             <div className="w-full flex flex-col gap-2">
               <Text size={18} weight="bold" color="primary">
                 KONTAKT OS
               </Text>
-              <div className="flex flex-col gap">
+              <div className="flex flex-col gap-2">
                 <div className="flex items-center gap-2">
                   <Text size={20} color="primary">
                     <MdLocationPin />
@@ -61,7 +66,7 @@ const Footer = () => {
                 </div>
               </div>
             </div>
-            <div className="w-full flex flex-col gap-1">
+            <div className="w-full flex flex-col gap-2 md:gap-7">
               <Text size={18} weight="bold" color="primary">
                 NYHEDSBREV
               </Text>
@@ -90,13 +95,17 @@ const Footer = () => {
             </div>
           </div>
           <hr />
-          <div className="h-10 flex">
-            <div className="w-full">
-              <Text color="primary" weight="semibold">
-                ©2022 DivingDjursland. Alle rettigheder forbeholdes.{" "}
+          <div className="py-2 flex">
+            <div className="w-full ">
+              <Text color="primary" weight="semibold" className="text-sm md:text-base">
+                ©2022 DivingDjursland. Alle rettigheder forbeholdes.
               </Text>
             </div>
-            <div></div>
+            <div className="flex gap-2 text-[1.5rem] cursor-pointer">
+              <FaFacebookSquare />
+              <FaInstagram />
+              <FaYoutube />
+            </div>
           </div>
         </div>
       </div>

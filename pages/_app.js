@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
 
         gradient:
           "linear-gradient(112deg, $blue100 -25%, $pink500 -10%, $purple500 80%)",
-        link: "#5E1DAD",
+        link: "#5379FE",
 
         myColor: "#ff4ecd",
       },

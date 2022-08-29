@@ -22,9 +22,10 @@ const Header = () => {
 
   return (
     <div className="bg-[#CFF0F8]">
-      <div className="flex justify-between items-center max-w-5xl mx-5 lg:mx-auto sticky">
+      <div className="flex justify-between items-center md:max-w-5xl md:mx-5 lg:mx-auto">
 
         <Content navigation={navigation} />
+
 
         {/* Right */}
 {/*         <div className="hidden sm:inline">

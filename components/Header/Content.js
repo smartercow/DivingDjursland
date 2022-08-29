@@ -1,28 +1,15 @@
 import { Navbar, Text, Avatar, Dropdown } from "@nextui-org/react";
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React from 'react'
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React from "react";
 
-const Content = ({navigation}) => {
-  const collapseItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
-
+const Content = ({ navigation }) => {
   const { asPath } = useRouter();
-  
+
   return (
-    <div className='w-full'>
-      <Navbar isBordered variant="sticky" css={{backgroundColor: "#0A2540"}}>
-        <Navbar.Toggle showIn="xs" />
+    <div className="w-full">
+      <Navbar isBordered variant="sticky" css={{ backgroundColor: "#0A2540" }}>
+        <Navbar.Toggle showIn="xs" color="primary" />
         <Navbar.Brand
           css={{
             "@xs": {
@@ -41,14 +28,18 @@ const Content = ({navigation}) => {
           variant="highlight-rounded"
         >
           {navigation.map((item, index) => {
-            if(asPath === item.link)
-            return(<Navbar.Link isActive key={index} href={item.link}>
-              {item.title}
-            </Navbar.Link>)
+            if (asPath === item.link)
+              return (
+                <Navbar.Link isActive key={index} href={item.link}>
+                  {item.title}
+                </Navbar.Link>
+              );
             else
-            return(<Navbar.Link key={index} href={item.link}>
-              {item.title}
-            </Navbar.Link>)
+              return (
+                <Navbar.Link key={index} href={item.link}>
+                  {item.title}
+                </Navbar.Link>
+              );
           })}
         </Navbar.Content>
         <Navbar.Content
@@ -73,8 +64,9 @@ const Content = ({navigation}) => {
             </Navbar.Item>
             <Dropdown.Menu
               aria-label="User menu actions"
-              color="secondary"
+              color="primary"
               onAction={(actionKey) => console.log({ actionKey })}
+              disabledKeys={["🇬🇧eng"]}
             >
               <Dropdown.Item key="profile" css={{ height: "$18" }}>
                 <Text b color="inherit" css={{ d: "flex" }}>
@@ -85,48 +77,60 @@ const Content = ({navigation}) => {
                 </Text>
               </Dropdown.Item>
               <Dropdown.Item key="settings" withDivider>
-                My Settings
+                Turer
               </Dropdown.Item>
-              <Dropdown.Item key="team_settings">Team Settings</Dropdown.Item>
-              <Dropdown.Item key="analytics" withDivider>
-                Analytics
+              <Dropdown.Item key="team_settings">Indstillinger</Dropdown.Item>
+              <Dropdown.Item key="hjaelp" withDivider>
+                Hjælp
               </Dropdown.Item>
-              <Dropdown.Item key="system">System</Dropdown.Item>
-              <Dropdown.Item key="configurations">Configurations</Dropdown.Item>
-              <Dropdown.Item key="help_and_feedback" withDivider>
-                Help & Feedback
-              </Dropdown.Item>
-              <Dropdown.Item key="logout" withDivider color="error">
-                Log Out
+              <Dropdown.Item key="logud" withDivider color="error">
+                Lod ud
               </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </Navbar.Content>
-        <Navbar.Collapse>
-          {collapseItems.map((item, index) => (
-            <Navbar.CollapseItem
-              key={item}
-              activeColor="secondary"
-              css={{
-                color: index === collapseItems.length - 1 ? "$error" : "",
-              }}
-              isActive={index === 2}
-            >
-              <Link
-                color="inherit"
-                css={{
-                  minWidth: "100%",
-                }}
-                href="#"
-              >
-                {item}
-              </Link>
-            </Navbar.CollapseItem>
-          ))}
+        <Navbar.Collapse css={{ width: "100%" }}>
+          {navigation.map((item, index) => {
+            if (asPath === item.link)
+              return (
+                <Navbar.CollapseItem
+                  key={item}
+                  activeColor="primary"
+                  isActive
+                >
+                  <Link
+                    color="primary"
+                    css={{
+                      minWidth: "100%",
+                    }}
+                    href={item.link}
+                  >
+                    {item.title}
+                  </Link>
+                </Navbar.CollapseItem>
+              );
+            else
+              return (
+                <Navbar.CollapseItem
+                  key={item}
+                  activeColor="primary"
+                >
+                  <Link
+                    color="primary"
+                    css={{
+                      minWidth: "100%",
+                    }}
+                    href={item.link}
+                  >
+                    {item.title}
+                  </Link>
+                </Navbar.CollapseItem>
+              );
+          })}
         </Navbar.Collapse>
       </Navbar>
     </div>
-  )
-}
+  );
+};
 
-export default Content
+export default Content;

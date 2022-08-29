@@ -53,7 +53,7 @@ const Tours = () => {
                 </Card.Body>
 
                 <Card.Header css={{ pb: 2 }}>
-                  <Button css={{ opacity: 0.8 }} size="xs">
+                  <Button color="secondary" css={{ opacity: 0.8 }} size="xs">
                     VIDEO
                   </Button>
                 </Card.Header>

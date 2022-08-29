@@ -50,7 +50,7 @@ export default function Home() {
             />
           </div>
           <PriceTeamSection />
-          <div className="relative h-auto w-auto mt-20">
+          <div className="relative h-auto w-auto mt-10 md:mt-16">
             <Image
               layout="responsive"
               height="5vh"
@@ -63,13 +63,13 @@ export default function Home() {
         </div>
         {/* Praktisk Info */}
         <div>
-          <div>
+          <div className="mb-7">
             <PraktiskInfo />
           </div>
         </div>
 
         {/* Video section */}
-        <div className="relative mt-20">
+        <div className="relative mt-10 hidden md:inline">
           <VideoSection />
         </div>
       </main>
